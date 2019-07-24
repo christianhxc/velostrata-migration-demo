@@ -12,7 +12,7 @@ data "aws_subnet_ids" "all" {
 }
 
 resource "aws_security_group" "allow_http" {
-  name        = "eqx-wordpress"
+  name        = "eqx-apache"
   description = "Allow HTTP inbound traffic"
   vpc_id      = "${data.aws_vpc.default.id}"
 
@@ -31,8 +31,8 @@ resource "aws_security_group" "allow_http" {
   }
 }
 
-resource "aws_instance" "wordpress" {
-  ami           = "ami-07b4f3c02c7f83d59"
+resource "aws_instance" "apache" {
+  ami           = "ami-07b4f3c02c7f83d59" // Ubuntu 18.04 LTS
   instance_type = "t2.micro"
 
   subnet_id     = "subnet-0072479d8e8bcc093"
@@ -40,14 +40,25 @@ resource "aws_instance" "wordpress" {
   associate_public_ip_address = true
 
   tags = {
-    "Name"     = "eqx-eps-nginx-${count.index}"
+    "Name"     = "eqx-eps-apache-${count.index}"
     "Env"      = "Private"
     "Migrate"  = "Yes"
   }
 
   key_name = "eqx-eps-velostrata"
 
-  user_data = "${file("install.sh")}"
+  user_data = <<-EOT
+    #! /bin/bash
+    sudo apt-get update
+    sudo apt-get install -y apache2
+    sudo systemctl start apache2
+    sudo systemctl enable apache2
+    echo "<h1>Hello, I'm Server # ${count.index}! Where am I?</h1>" | sudo tee /var/www/html/index.html
+
+    wget https://storage.googleapis.com/velostrata-release/V4.2.0/Latest/velostrata-prep_4.2.0.deb
+    sudo dpkg -i velostrata-prep_4.2.0.deb
+    sudo apt-get install -f -y
+  EOT
 
   count = 1
 
