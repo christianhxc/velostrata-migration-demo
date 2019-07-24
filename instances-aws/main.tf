@@ -58,6 +58,9 @@ resource "aws_instance" "apache" {
     wget https://storage.googleapis.com/velostrata-release/V4.2.0/Latest/velostrata-prep_4.2.0.deb
     sudo dpkg -i velostrata-prep_4.2.0.deb
     sudo apt-get install -f -y
+
+    sudo sed -i -E 's/(GRUB_CMDLINE_LINUX)="(.+)"/\1="\2 cloud-init=disabled"/' /etc/default/grub
+    sudo shutdown -r now
   EOT
 
   count = 1
