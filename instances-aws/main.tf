@@ -60,6 +60,7 @@ resource "aws_instance" "apache" {
     sudo apt-get install -f -y
 
     sudo sed -i -E 's/(GRUB_CMDLINE_LINUX)="(.+)"/\1="\2 cloud-init=disabled"/' /etc/default/grub
+    sudo update-grub
     sudo shutdown -r now
   EOT
 
