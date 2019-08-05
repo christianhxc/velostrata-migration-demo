@@ -1,0 +1,4 @@
+RunGroup,BlockOnFailure,VmID,VmName,SourceCloudDetails,OsType,OsLicense,NumCPU,MemoryGB,NumDisks,ProvisionedSpaceGB,TargetCloudExtension,TargetEdgeNode,WriteIsolation,TargetInstanceType,TargetInstanceName,TargetSubnet,TargetStaticIP,TargetPublicIP,GcpEphemeralPublicIp,GcpProject,GcpNetworkTags,"GcpInstanceServiceAccount",GcpDiskType,ProbeTCPPort,ProbeWaitMinutes
+1,false,vm-30,webserver,,"Ubuntu Linux (64-bit)",,1,1.0,1,17,VMWare,NodeA,false,n1-standard-2,webserver,,,,true,eps-demos,,,SSD,22,5
+1,false,vm-56,DBserver,,"Microsoft Windows Server 2016 or later (64-bit)",,1,4.0,1,44,VMWare,NodeA,false,n1-standard-2,dbserver,,,,true,eps-demos,,,SSD,3389,5
+1,false,vm-34,mysql,,"Ubuntu Linux (64-bit)",,1,1.0,1,17,VMWare,NodeA,false,n1-standard-2,mysql,,,,true,eps-demos,,,SSD,22,5

@@ -1,0 +1,3 @@
+RunGroup,BlockOnFailure,VmID,VmName,SourceCloudDetails,OsType,OsLicense,NumCPU,MemoryGB,NumDisks,ProvisionedSpaceGB,TargetCloudExtension,TargetEdgeNode,WriteIsolation,TargetInstanceType,TargetInstanceName,TargetSubnet,TargetStaticIP,TargetPublicIP,GcpEphemeralPublicIp,GcpProject,GcpNetworkTags,"GcpInstanceServiceAccount",GcpDiskType,tag:migrate,tag:env,ProbeTCPPort,ProbeWaitMinutes
+1,false,i-095fdb973fa6f9ef2,,AWSDevOps,linux,,1,1.0,1,8,GCP,NodeA,true,n1-standard-2,eqx-eps-ubuntu18,,,,true,eps-demos,,,SSD,yes,private,22,5
+1,false,i-0dfce13adaec2a56c,,AWSDevOps,windows,,2,4.0,1,8,GCP,NodeA,true,n1-standard-2,eqx-eps-windows2016,,,,true,eps-demos,,,SSD,yes,private,22,5
