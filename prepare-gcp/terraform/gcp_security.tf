@@ -48,6 +48,21 @@ resource "google_compute_firewall" "gcp-allow-ssh" {
   ]
 }
 
+# Allow RDP for iperf testing.
+resource "google_compute_firewall" "gcp-allow-rdp" {
+  name    = "${google_compute_network.gcp-network.name}-gcp-allow-rdp"
+  network = "${google_compute_network.gcp-network.name}"
+
+  allow {
+    protocol = "tcp"
+    ports = ["3389"]
+  }
+
+  source_ranges = [
+    "0.0.0.0/0"
+  ]
+}
+
 # Allow TCP traffic from the Internet.
 resource "google_compute_firewall" "gcp-allow-internet" {
   name    = "${google_compute_network.gcp-network.name}-gcp-allow-internet"
@@ -56,6 +71,20 @@ resource "google_compute_firewall" "gcp-allow-internet" {
   allow {
     protocol = "tcp"
     ports = ["80"]
+  }
+
+  source_ranges = [
+    "0.0.0.0/0"
+  ]
+}
+
+resource "google_compute_firewall" "gcp-allow-internet-https" {
+  name    = "${google_compute_network.gcp-network.name}-gcp-allow-https"
+  network = "${google_compute_network.gcp-network.name}"
+
+  allow {
+    protocol = "tcp"
+    ports = ["443"]
   }
 
   source_ranges = [
@@ -87,3 +116,4 @@ resource "google_compute_firewall" "gcp-allow-internal-traffic" {
     "${var.gcp_subnet2_cidr}"
   ]
 }
+
